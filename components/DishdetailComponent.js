@@ -39,8 +39,10 @@ export class DishdetailComponent extends Component {
       table[0];
     return date;
   }
-  renderDish(dish) {
-    if (dish != null)
+  renderDish(dish) {}
+  render() {
+    if (this.props.selectedDish != null) {
+      const dish = this.props.selectedDish;
       return (
         <div>
           <Card>
@@ -64,9 +66,6 @@ export class DishdetailComponent extends Component {
           </ul>
         </div>
       );
-    else return <div></div>;
-  }
-  render() {
-    return <div>{this.renderDish(this.props.selectedDish)}</div>;
+    } else return <div></div>;
   }
 }
