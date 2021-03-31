@@ -42,7 +42,7 @@ export const DishdetailComponent = (props) => {
   //     table[0];
   //   return date;
   // }
-  function RenderDish(props) {
+  function RenderDish({ dish }) {
     function dateFormat(date_) {
       var table = date_.split("-");
 
@@ -70,7 +70,6 @@ export const DishdetailComponent = (props) => {
       return date;
     }
 
-    const { dish } = props;
     if (dish != null) {
       return (
         <div>
@@ -86,9 +85,16 @@ export const DishdetailComponent = (props) => {
             <dt>Comments</dt>
             {dish.comments.map((comment, i) => (
               <>
+                {" "}
+                {/* dateFormat(comment.date) */}
                 <dd>{comment.comment}</dd>
                 <li key={i}>
-                  ---{comment.author} ,{dateFormat(comment.date)}
+                  ---{comment.author} ,
+                  {new Intl.DateTimeFormat("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "2-digit",
+                  }).format(new Date(Date.parse(comment.date)))}
                 </li>
               </>
             ))}
