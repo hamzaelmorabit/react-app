@@ -1,17 +1,9 @@
 import logo from "./logo.svg";
 import React, { Component } from "react";
-import { DISHES } from "./shared/dishes";
 import "./App.css";
 import { Navbar, NavbarBrand } from "reactstrap";
-import Button from "./Button";
-import { Menu } from "./components/MenuComponent";
+import Main from "./components/MainComponent";
 export class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dishes: DISHES,
-    };
-  }
   render() {
     return (
       <div className="App">
@@ -21,7 +13,7 @@ export class App extends Component {
           </div>
         </Navbar>
         {/* <MenuComponent /> */}
-        <Menu dishes={this.state.dishes} />
+        <Main />
       </div>
     );
   }

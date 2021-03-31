@@ -9,9 +9,12 @@ import {
 } from "reactstrap";
 
 export class DishdetailComponent extends Component {
-  constructor(props) {
-    super(props);
-  }
+  componentDidMount = () => {
+    console.log(`DishdetailComponent component componentDidMount Invoked`);
+  };
+  componentDidUpdate = () => {
+    console.log(`DishdetailComponent component componentDidUpdate Invoked`);
+  };
 
   dateFormat(date_) {
     var table = date_.split("-");
@@ -41,8 +44,11 @@ export class DishdetailComponent extends Component {
   }
   renderDish(dish) {}
   render() {
-    if (this.props.selectedDish != null) {
+    console.log(`DishdetailComponent component render Invoked`);
+
+    if (this.props.selectedDish) {
       const dish = this.props.selectedDish;
+
       return (
         <div>
           <Card>
@@ -55,10 +61,10 @@ export class DishdetailComponent extends Component {
 
           <ul className="list-unstyled">
             <dt>Comments</dt>
-            {dish.comments.map((comment) => (
+            {dish.comments.map((comment, i) => (
               <>
                 <dd>{comment.comment}</dd>
-                <li>
+                <li key={i}>
                   ---{comment.author} ,{this.dateFormat(comment.date)}
                 </li>
               </>
