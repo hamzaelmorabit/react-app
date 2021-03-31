@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   Card,
   CardImg,
@@ -8,47 +8,70 @@ import {
   CardTitle,
 } from "reactstrap";
 
-export class DishdetailComponent extends Component {
-  componentDidMount = () => {
-    console.log(`DishdetailComponent component componentDidMount Invoked`);
-  };
-  componentDidUpdate = () => {
-    console.log(`DishdetailComponent component componentDidUpdate Invoked`);
-  };
+export const DishdetailComponent = (props) => {
+  // componentDidMount = () => {
+  //   console.log(`DishdetailComponent component componentDidMount Invoked`);
+  // };
+  // componentDidUpdate = () => {
+  //   console.log(`DishdetailComponent component componentDidUpdate Invoked`);
+  // };
 
-  dateFormat(date_) {
-    var table = date_.split("-");
+  // dateFormat(date_) {
+  //   var table = date_.split("-");
 
-    var month = new Array();
-    month[0] = "Jan";
-    month[1] = "Feb";
-    month[2] = "Mar";
-    month[3] = "Apr";
-    month[4] = "May";
-    month[5] = "Jun";
-    month[6] = "Jul";
-    month[7] = "Aug";
-    month[8] = "Sep";
-    month[9] = "Oct";
-    month[10] = "Nov";
-    month[11] = "Dec";
-    var n = month[table[1] - 1];
-    const date =
-      " " +
-      n +
-      " " +
-      (parseInt(table[2].substring(0, 2)) + 1) +
-      ", " +
-      table[0];
-    return date;
-  }
-  renderDish(dish) {}
-  render() {
-    console.log(`DishdetailComponent component render Invoked`);
+  //   var month = new Array();
+  //   month[0] = "Jan";
+  //   month[1] = "Feb";
+  //   month[2] = "Mar";
+  //   month[3] = "Apr";
+  //   month[4] = "May";
+  //   month[5] = "Jun";
+  //   month[6] = "Jul";
+  //   month[7] = "Aug";
+  //   month[8] = "Sep";
+  //   month[9] = "Oct";
+  //   month[10] = "Nov";
+  //   month[11] = "Dec";
+  //   var n = month[table[1] - 1];
+  //   const date =
+  //     " " +
+  //     n +
+  //     " " +
+  //     (parseInt(table[2].substring(0, 2)) + 1) +
+  //     ", " +
+  //     table[0];
+  //   return date;
+  // }
+  function RenderDish(props) {
+    function dateFormat(date_) {
+      var table = date_.split("-");
 
-    if (this.props.selectedDish) {
-      const dish = this.props.selectedDish;
+      var month = new Array();
+      month[0] = "Jan";
+      month[1] = "Feb";
+      month[2] = "Mar";
+      month[3] = "Apr";
+      month[4] = "May";
+      month[5] = "Jun";
+      month[6] = "Jul";
+      month[7] = "Aug";
+      month[8] = "Sep";
+      month[9] = "Oct";
+      month[10] = "Nov";
+      month[11] = "Dec";
+      var n = month[table[1] - 1];
+      const date =
+        " " +
+        n +
+        " " +
+        (parseInt(table[2].substring(0, 2)) + 1) +
+        ", " +
+        table[0];
+      return date;
+    }
 
+    const { dish } = props;
+    if (dish != null) {
       return (
         <div>
           <Card>
@@ -65,7 +88,7 @@ export class DishdetailComponent extends Component {
               <>
                 <dd>{comment.comment}</dd>
                 <li key={i}>
-                  ---{comment.author} ,{this.dateFormat(comment.date)}
+                  ---{comment.author} ,{dateFormat(comment.date)}
                 </li>
               </>
             ))}
@@ -74,4 +97,8 @@ export class DishdetailComponent extends Component {
       );
     } else return <div></div>;
   }
-}
+
+  console.log(`DishdetailComponent component render Invoked`);
+
+  return <RenderDish dish={props.selectedDish} />;
+};
