@@ -35,6 +35,20 @@ export class App extends Component {
     this.setState({ users });
   };
 
+  handleDelete = async (post) => {
+    let usersOriginal = this.state.users;
+    let users = this.state.users.filter((user) => user.id !== post.id);
+    this.setState({ users });
+
+    try {
+      await axios.delete(apiEndPoint + "/" + post.id);
+      throw new Error("");
+    } catch (e) {
+      alert("some thing happend");
+      this.setState({ users: usersOriginal });
+    }
+  };
+
   render() {
     return (
       <div className="App">
@@ -71,7 +85,13 @@ export class App extends Component {
                       <td>{user.title}</td>
 
                       <td>
-                        <button className="btn btn-danger">Delete</button>&nbsp;
+                        <button
+                          onClick={() => this.handleDelete(user)}
+                          className="btn btn-danger"
+                        >
+                          Delete
+                        </button>
+                        &nbsp;
                         {/* <button className="btn btn-info">Modifier</button> */}
                       </td>
 
