@@ -4,6 +4,19 @@ import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { App } from "./App";
 import reportWebVitals from "./reportWebVitals";
+import "react-toastify/dist/ReactToastify.css";
+import * as Sentry from "@sentry/react";
+import { Integrations } from "@sentry/tracing";
+Sentry.init({
+  dsn:
+    "https://73846e5fd41c457da3674bce68ae7d05@o562977.ingest.sentry.io/5702318",
+  integrations: [new Integrations.BrowserTracing()],
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+});
 
 ReactDOM.render(
   <React.StrictMode>
