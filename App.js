@@ -11,11 +11,11 @@ export class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <Navbar dark color="primary">
+          {/* <Navbar dark color="primary">
             <div className="container">
               <NavbarBrand href="/">Ristorante Con Fusion</NavbarBrand>
             </div>
-          </Navbar>
+          </Navbar> */}
           {/* <MenuComponent /> */}
           <Main />
           {/* <Service /> */}
