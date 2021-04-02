@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { App } from "./App";
+import "font-awesome/css/font-awesome.css";
+import "bootstrap-social/bootstrap-social.css";
 import reportWebVitals from "./reportWebVitals";
 import "react-toastify/dist/ReactToastify.css";
 import * as Sentry from "@sentry/react";
