@@ -10,6 +10,7 @@ import { COMMENTS } from "../shared/comments";
 import { PROMOTIONS } from "../shared/promotions";
 import { LEADERS } from "../shared/leaders";
 import Contact from "./Contact";
+import About from "./AboutComponent";
 
 class Main extends Component {
   constructor(props) {
@@ -45,6 +46,24 @@ class Main extends Component {
     );
   };
 
+  DishdetailComponent_ = ({ match }) => {
+    console.log(match.params.id);
+    return (
+      <DishdetailComponent
+        selectedDish={
+          this.state.dishes.filter(
+            (dish) => dish.id == parseInt(match.params.id, 10)
+          )[0]
+        }
+        comments={this.state.comments.filter(
+          (comment) => comment.dishId == parseInt(match.params.id, 10)
+        )}
+      />
+    );
+  };
+  AboutUsComponent = () => {
+    return <About leaders={this.state.leaders} />;
+  };
   render() {
     console.log(`Main component render Invoked`);
 
@@ -53,11 +72,14 @@ class Main extends Component {
         <Header />
         <Switch>
           <Route path="/home" component={this.HomePage} />
+          <Route path="/aboutus" component={this.AboutUsComponent} />
           <Route
             exact
             path="/menu"
-            component={() => <Menu dishes={this.state.dishes} />}
+            component={(props) => <Menu dishes={this.state.dishes} />}
           />
+          <Route path="/menu/:id" component={this.DishdetailComponent_} />
+
           <Route exact path="/contactus" component={Contact} />
           <Redirect to="/home" />
         </Switch>
