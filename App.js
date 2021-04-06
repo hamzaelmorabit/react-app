@@ -6,6 +6,7 @@ import Main from "./components/MainComponent";
 import Service from "./service/Service";
 import axios from "axios";
 import { BrowserRouter } from "react-router-dom";
+// AIzaSyBaT82mWzKUf-sGhbW2Z2Ls_DS6m8MYvAE
 export class App extends Component {
   render() {
     return (
@@ -17,8 +18,8 @@ export class App extends Component {
             </div>
           </Navbar> */}
           {/* <MenuComponent /> */}
-          <Main />
-          {/* <Service /> */}
+          {/* <Main /> */}
+          <Service />
         </div>
       </BrowserRouter>
     );

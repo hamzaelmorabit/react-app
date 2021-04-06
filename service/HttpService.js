@@ -16,3 +16,4 @@ export default {
   put: axios.put,
   delete: axios.delete,
 };
+// "https://jsonplaceholder.typicode.com/posts"

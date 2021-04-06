@@ -2,18 +2,32 @@ import React, { useState, useEffect } from "react";
 import http from "./HttpService";
 import { ToastContainer, toast } from "react-toastify";
 import * as Sentry from "@sentry/react";
-
+import axios from "axios";
 import config from "../config.json";
 
 const Service = () => {
   const [users, setUsers] = useState([]);
-
-  useEffect(async () => {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
     const fetchData = async () => {
-      const { data: users } = await http.get(config.apiEndPoint);
-      console.log(users);
+      console.log("data", "data");
 
-      setUsers(users);
+      try {
+        const data = await http.get(`${config.apiEndPoint}`, {
+          headers: {
+            Authorization: "67356d80c20ff1949021d29fda5238c4",
+            user: "imdev",
+            api_pass: "7c89ad287e0ba21d58647201dc8b3c69",
+          },
+        });
+        console.log(data, "data");
+      } catch (ex) {
+        alert(ex);
+      }
+      // http.get(config.apiEndPoint);
+
+      setLoading(false);
+      // setUsers(users);
     };
 
     fetchData();
@@ -56,58 +70,64 @@ const Service = () => {
   };
   return (
     <div className="test">
-      <ToastContainer />
-      <button className="btn btn-primary" onClick={handleAdd}>
-        Add
-      </button>
-      <div style={{ marginTop: "4%" }} className="panel panel-primary">
-        <style></style>
+      {loading ? (
+        <div className="spinner-border m-5" role="status"></div>
+      ) : (
         <div>
-          <h2 style={{ textAlign: "center" }} className="h4 mb-4">
-            Liste des personnes
-          </h2>
-        </div>
-        <div style={{ marginTop: "3%" }} className="panel-body">
-          <table className="table table-striped">
-            <thead>
-              <tr>
-                <th>title</th>
-                <th>Delete</th>
-                <th>Update</th>
-              </tr>
-            </thead>
-            {users.map((user) => (
-              <>
-                <tbody>
-                  <tr key={user.id}>
-                    <td>{user.title}</td>
-
-                    <td>
-                      <button
-                        onClick={() => handleDelete(user)}
-                        className="btn btn-danger"
-                      >
-                        Delete
-                      </button>
-                      &nbsp;
-                      {/* <button className="btn btn-info">Modifier</button> */}
-                    </td>
-
-                    <td>
-                      <button
-                        onClick={() => handleUpdate(user)}
-                        className="btn btn-info btn-block"
-                      >
-                        Update
-                      </button>
-                    </td>
+          <ToastContainer />
+          <button className="btn btn-primary" onClick={handleAdd}>
+            Add
+          </button>
+          <div style={{ marginTop: "4%" }} className="panel panel-primary">
+            <style></style>
+            <div>
+              <h2 style={{ textAlign: "center" }} className="h4 mb-4">
+                Liste des personnes
+              </h2>
+            </div>
+            <div style={{ marginTop: "3%" }} className="panel-body">
+              <table className="table table-striped">
+                <thead>
+                  <tr>
+                    <th>title</th>
+                    <th>Delete</th>
+                    <th>Update</th>
                   </tr>
-                </tbody>
-              </>
-            ))}
-          </table>
+                </thead>
+                {users.map((user) => (
+                  <>
+                    <tbody>
+                      <tr key={user.id}>
+                        <td>{user.title}</td>
+
+                        <td>
+                          <button
+                            onClick={() => handleDelete(user)}
+                            className="btn btn-danger"
+                          >
+                            Delete
+                          </button>
+                          &nbsp;
+                          {/* <button className="btn btn-info">Modifier</button> */}
+                        </td>
+
+                        <td>
+                          <button
+                            onClick={() => handleUpdate(user)}
+                            className="btn btn-info btn-block"
+                          >
+                            Update
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </>
+                ))}
+              </table>
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
