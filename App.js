@@ -18,8 +18,8 @@ export class App extends Component {
             </div>
           </Navbar> */}
           {/* <MenuComponent /> */}
-          {/* <Main /> */}
-          <Service />
+          <Main />
+          {/* <Service /> */}
         </div>
       </BrowserRouter>
     );
