@@ -161,3 +161,40 @@ class Header extends Component {
   }
 }
 export default Header;
+
+//DishdetailComponent
+
+// <RenderDish dish={props.selectedDish} comments={props.comments} />;
+// componentDidMount = () => {
+//   console.log(`DishdetailComponent component componentDidMount Invoked`);
+// };
+// componentDidUpdate = () => {
+//   console.log(`DishdetailComponent component componentDidUpdate Invoked`);
+// };
+
+// const dateFormat = (date_) => {
+//   var table = date_.split("-");
+
+//   var month = new Array();
+//   month[0] = "Jan";
+//   month[1] = "Feb";
+//   month[2] = "Mar";
+//   month[3] = "Apr";
+//   month[4] = "May";
+//   month[5] = "Jun";
+//   month[6] = "Jul";
+//   month[7] = "Aug";
+//   month[8] = "Sep";
+//   month[9] = "Oct";
+//   month[10] = "Nov";
+//   month[11] = "Dec";
+//   var n = month[table[1] - 1];
+//   const date =
+//     " " +
+//     n +
+//     " " +
+//     (parseInt(table[2].substring(0, 2)) + 1) +
+//     ", " +
+//     table[0];
+//   return date;
+// };
