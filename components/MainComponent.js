@@ -25,6 +25,7 @@ const mapStateToProps = (state) => {
 class Main extends Component {
   constructor(props) {
     console.log(`Main component Constructor Invoked`);
+
     super(props);
     // this.props = {
     //   dishes: DISHES,
