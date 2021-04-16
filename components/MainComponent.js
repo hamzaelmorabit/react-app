@@ -12,7 +12,7 @@ import { LEADERS } from "../shared/leaders";
 import { connect } from "react-redux";
 import Contact from "./Contact";
 import About from "./AboutComponent";
-
+import { addComment } from "../redux/ActionStore";
 const mapStateToProps = (state) => {
   return {
     dishes: state.dishes,
@@ -21,6 +21,11 @@ const mapStateToProps = (state) => {
     leaders: state.leaders,
   };
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  addComment: (dishId, author, comment, rating) =>
+    dispatch(addComment(dishId, author, comment, rating)),
+});
 
 class Main extends Component {
   constructor(props) {
@@ -69,6 +74,7 @@ class Main extends Component {
         comments={this.props.comments.filter(
           (comment) => comment.dishId == parseInt(match.params.id, 10)
         )}
+        addComment={this.props.addComment}
       />
     );
   };
@@ -113,4 +119,4 @@ class Main extends Component {
   }
 }
 
-export default withRouter(connect(mapStateToProps)(Main));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

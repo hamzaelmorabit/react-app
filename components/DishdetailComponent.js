@@ -60,12 +60,24 @@ export const DishdetailComponent = (props) => {
       });
     }
 
-    handleSubmit(val) {
-      this.setState({ author: val["author"] });
-      this.setState({ message: val["message"] });
-      this.setState({ rating: val["rating"] });
+    handleSubmit(values) {
+      // this.setState({ author: val["author"] });
+      // this.setState({ message: val["message"] });
+      // this.setState({ rating: val["rating"] });
+      console.log(
+        this.props.dishId,
+        values.rating,
+        values.author,
+        values.message
+      );
+      this.props.addComment(
+        this.props.dishId,
+        values.rating,
+        values.author,
+        values.message
+      );
 
-      alert("Current State is: " + JSON.stringify(this.state));
+      alert("Current State is: " + JSON.stringify(values));
     }
     render() {
       return (
@@ -164,7 +176,7 @@ export const DishdetailComponent = (props) => {
       );
     }
   }
-  function RenderComments({ comments }) {
+  function RenderComments({ comments, dishId, addComment }) {
     console.log(comments);
     if (comments != null) {
       return (
@@ -185,7 +197,7 @@ export const DishdetailComponent = (props) => {
                   </CardText>
                 </>
               ))}
-              <CommentForm />
+              <CommentForm dishId={dishId} addComment={addComment} />
             </CardBody>
           </Card>
         </div>
@@ -214,7 +226,11 @@ export const DishdetailComponent = (props) => {
           <RenderDish dish={props.selectedDish} />
         </div>
         <div className="col-12 col-md-5 m-1">
-          <RenderComments comments={props.comments} />
+          <RenderComments
+            comments={props.comments}
+            dishId={props.selectedDish.id}
+            addComment={props.addComment}
+          />
         </div>
       </div>
     </div>
