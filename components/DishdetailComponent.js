@@ -16,6 +16,8 @@ import {
   Row,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import { Loading } from "./LoadingComponent";
+
 import { Control, LocalForm, Errors } from "react-redux-form";
 
 const required = (val) => val && val.length;
@@ -23,8 +25,24 @@ const maxLength = (len) => (val) => !val || val.length <= len;
 const minLength = (len) => (val) => val && val.length >= len;
 
 export const DishdetailComponent = (props) => {
-  function RenderDish({ dish }) {
-    if (dish != null) {
+  function RenderDish({ dish, dishesLoading, errMsg }) {
+    if (dishesLoading) {
+      return (
+        <div className="container">
+          <div className="row">
+            <Loading />
+          </div>
+        </div>
+      );
+    } else if (errMsg) {
+      return (
+        <div className="container">
+          <div className="row">
+            <h4>{errMsg}</h4>
+          </div>
+        </div>
+      );
+    } else if (dish != null) {
       return (
         <div>
           <Card>
@@ -223,7 +241,11 @@ export const DishdetailComponent = (props) => {
       </div>
       <div className="row">
         <div className="col-12 col-md-5 m-1">
-          <RenderDish dish={props.selectedDish} />
+          <RenderDish
+            dish={props.selectedDish}
+            isLoading={props.isLoading}
+            errMsg={props.errMsg}
+          />
         </div>
         <div className="col-12 col-md-5 m-1">
           <RenderComments
