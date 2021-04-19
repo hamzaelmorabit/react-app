@@ -17,7 +17,8 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Loading } from "./LoadingComponent";
-
+import { baseUrl } from "../shared/baseUrl";
+import { FadeTransform, Stagger } from "react-animation-components";
 import { Control, LocalForm, Errors } from "react-redux-form";
 
 const required = (val) => val && val.length;
@@ -45,13 +46,20 @@ export const DishdetailComponent = (props) => {
     } else if (dish != null) {
       return (
         <div>
-          <Card>
-            <CardImg top src={dish.image} alt={dish.name} />
-            <CardBody>
-              <CardTitle>{dish.name}</CardTitle>
-              <CardText>{dish.description}</CardText>
-            </CardBody>
-          </Card>
+          <FadeTransform
+            in
+            transformProps={{
+              exitTransform: "scale(0.5) translateY(-50%)",
+            }}
+          >
+            <Card>
+              <CardImg top src={baseUrl + dish.image} alt={dish.name} />
+              <CardBody>
+                <CardTitle>{dish.name}</CardTitle>
+                <CardText>{dish.description}</CardText>
+              </CardBody>
+            </Card>
+          </FadeTransform>
         </div>
       );
     } else return <div></div>;
@@ -201,20 +209,22 @@ export const DishdetailComponent = (props) => {
         <div>
           <Card>
             <CardBody>
-              <h3>Comments</h3>{" "}
-              {comments.map((comt) => (
-                <>
-                  <CardTitle>{comt.comment}</CardTitle>
-                  <CardText>
-                    ---{comt.author} ,
-                    {new Intl.DateTimeFormat("en-US", {
-                      year: "numeric",
-                      month: "short",
-                      day: "2-digit",
-                    }).format(new Date(Date.parse(comt.date)))}
-                  </CardText>
-                </>
-              ))}
+              <Stagger in>
+                <h3>Comments</h3>{" "}
+                {comments.map((comt) => (
+                  <>
+                    <CardTitle>{comt.comment}</CardTitle>
+                    <CardText>
+                      ---{comt.author} ,
+                      {new Intl.DateTimeFormat("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "2-digit",
+                      }).format(new Date(Date.parse(comt.date)))}
+                    </CardText>
+                  </>
+                ))}
+              </Stagger>
               <CommentForm dishId={dishId} addComment={addComment} />
             </CardBody>
           </Card>
@@ -251,7 +261,8 @@ export const DishdetailComponent = (props) => {
           <RenderComments
             comments={props.comments}
             dishId={props.selectedDish.id}
-            addComment={props.addComment}
+            addComment={props.postComment}
+            commentsErrMess={props.commentsErrMess}
           />
         </div>
       </div>
