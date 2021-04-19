@@ -46,20 +46,20 @@ export const DishdetailComponent = (props) => {
     } else if (dish != null) {
       return (
         <div>
-          <FadeTransform
+          {/* <FadeTransform
             in
             transformProps={{
               exitTransform: "scale(0.5) translateY(-50%)",
             }}
-          >
-            <Card>
-              <CardImg top src={baseUrl + dish.image} alt={dish.name} />
-              <CardBody>
-                <CardTitle>{dish.name}</CardTitle>
-                <CardText>{dish.description}</CardText>
-              </CardBody>
-            </Card>
-          </FadeTransform>
+          > */}
+          <Card>
+            <CardImg top src={baseUrl + dish.image} alt={dish.name} />
+            <CardBody>
+              <CardTitle>{dish.name}</CardTitle>
+              <CardText>{dish.description}</CardText>
+            </CardBody>
+          </Card>
+          {/* </FadeTransform> */}
         </div>
       );
     } else return <div></div>;
@@ -209,22 +209,22 @@ export const DishdetailComponent = (props) => {
         <div>
           <Card>
             <CardBody>
-              <Stagger in>
-                <h3>Comments</h3>{" "}
-                {comments.map((comt) => (
-                  <>
-                    <CardTitle>{comt.comment}</CardTitle>
-                    <CardText>
-                      ---{comt.author} ,
-                      {new Intl.DateTimeFormat("en-US", {
-                        year: "numeric",
-                        month: "short",
-                        day: "2-digit",
-                      }).format(new Date(Date.parse(comt.date)))}
-                    </CardText>
-                  </>
-                ))}
-              </Stagger>
+              {/* <Stagger in> */}
+              <h3>Comments</h3>{" "}
+              {comments.map((comt) => (
+                <>
+                  <CardTitle>{comt.comment}</CardTitle>
+                  <CardText>
+                    ---{comt.author} ,
+                    {new Intl.DateTimeFormat("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "2-digit",
+                    }).format(new Date(Date.parse(comt.date)))}
+                  </CardText>
+                </>
+              ))}
+              {/* </Stagger> */}
               <CommentForm dishId={dishId} addComment={addComment} />
             </CardBody>
           </Card>
